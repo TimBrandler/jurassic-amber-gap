@@ -1,2 +1,17 @@
-# jurassic-amber-gap
-This page holds the custom functions and the workflow script for the titular manuscript by Seyfullah et al. 202(7?)
+### The Jurassic Amber Gap
+This page holds the custom functions, workflow script, data and plots for the titular manuscript by Seyfullah et al. 202(7?)
+
+## scripts
+In scripts you find two **.R** files. **functions.R** holds two custom functions: (1) **p.map** is a wrapper around some *rgplates* and *terra* functions which takes an occurrence-data data.frame and partitions it into temporal and spatial bins and returns a set of according metrics, most importantly the number of occurrence counts per spatial-temporal bin and the raster. (2) **pal.plot** is a plotting function that takes the output of **p.map** as input.
+
+All functionality needed/used in the Seyfullah et al. 202(7?) paper are in working condition. The functions themselves are/will always be a work-in-progress. 
+
+## data 
+
+In data are two **.csv** files: **conifer_genera_done.csv** contains a list of genera contained within gymnosperma and an identifier for the gymnosperm subgroup. **conis.csv** is a curated PBDB dataset wich is filtered by using only the genera labeled as *conifer* from the **conifer_genera_done.csv**. 
+
+## output plots
+
+
+
+

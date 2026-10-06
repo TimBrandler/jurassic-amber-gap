@@ -57,7 +57,7 @@ p.map <- function(x = NULL, age = NULL, method = "mid", feature = "static_polygo
 }
 
 
-pal.plot <- function(x = NULL, layout = par(mfrow=c(1,1)), main = "", plot = TRUE, legend = FALSE, pt_col = "#38106Ccc", viridis = "magma", alpha = 0.8, begin = 1, end = 0, max = NULL, style = "circle", scale_factor = 0.5){
+pal.plot <- function(x = NULL, layout = par(mfrow=c(1,1)), main = "", plot = TRUE, legend = FALSE, pt_col = "#38106C80", viridis = "magma", alpha = 0.8, begin = 1, end = 0, max = NULL, style = "circle", scale_factor = 0.5){
   
   map_polys <- lapply(x$map, function(poly) {
     sf::st_as_sf(as.data.frame(poly), crs = 4326)
@@ -89,7 +89,7 @@ pal.plot <- function(x = NULL, layout = par(mfrow=c(1,1)), main = "", plot = TRU
       terra::points(r_pts, col = pt_col, pch = 16, cex = sqrt(vals) * scale_factor)
     }
     
-    if(legend){
+    if(legend){  ### this doesnt work yet 
       col_palette <- viridis::viridis(max, alpha = 1, begin = begin, end = end, option = viridis)
       fields::image.plot(legend.only = TRUE, zlim = range(vals),
                          col = col_palette, legend.lab = "# Occurrences",
