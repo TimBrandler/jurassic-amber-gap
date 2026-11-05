@@ -1,8 +1,8 @@
-## Custom workflow functions
-## for the JAG-paper Seyfullah et al. 2026 (?)
-## by Tim Brandler
+## Custom functions used in the workflow script
+## for the " Evidence of absence, or absence of evidence? The ‘Jurassic amber gap’ " paper Seyfullah et al. 202(7?)
+## code written by Tim Brandler
 
-p.map <- function(x = NULL, age = NULL, method = "mid", feature = "static_polygons", model = "MERDITH2021", resolution = 500000, time.data = stages){
+p.map <- function(x = NULL, age = NULL, method = "mid", feature = "static_polygons", model = "MERDITH2021", resolution = 1e6, time.data = stages){
 
   u.age <- vector()  
   
@@ -57,7 +57,7 @@ p.map <- function(x = NULL, age = NULL, method = "mid", feature = "static_polygo
 }
 
 
-pal.plot <- function(x = NULL, layout = par(mfrow=c(1,1)), main = "", plot = TRUE, legend = FALSE, pt_col = "#38106C80", viridis = "magma", alpha = 0.8, begin = 1, end = 0, max = NULL, style = "circle", scale_factor = 0.5){
+pal.plot <- function(x = NULL, main = "", plot = TRUE, legend = FALSE, add = FALSE, pt_col = "#38106Ca0", viridis = "magma", alpha = 0.8, begin = 1, end = 0, style = "circle", scale_factor = 0.5){
   
   map_polys <- lapply(x$map, function(poly) {
     sf::st_as_sf(as.data.frame(poly), crs = 4326)
@@ -76,12 +76,12 @@ pal.plot <- function(x = NULL, layout = par(mfrow=c(1,1)), main = "", plot = TRU
   
   if(startsWith(pt_col, "vir")){
   
-  pt_col <- viridis::viridis(max, alpha = alpha, begin = begin, end = end, option = viridis)[vals]  #max(vals)
   }
-  
+
   if(plot){
-    plot(map_eq[[1]]$geometry, col = "#a9a9a9cc", border = NA, main = main)
-    
+   if(!add){
+     plot(map_eq[[1]]$geometry, col = "#a9a9a9cc", border = NA, main = main)
+   }
     if(style == "box"){
       terra::points(r_pts, col = pt_col, pch = 15, cex = 1.5)
     } else if (style == "circle"){
@@ -89,12 +89,9 @@ pal.plot <- function(x = NULL, layout = par(mfrow=c(1,1)), main = "", plot = TRU
       terra::points(r_pts, col = pt_col, pch = 16, cex = sqrt(vals) * scale_factor)
     }
     
-    if(legend){  ### this doesnt work yet 
-      col_palette <- viridis::viridis(max, alpha = 1, begin = begin, end = end, option = viridis)
-      fields::image.plot(legend.only = TRUE, zlim = range(vals),
-                         col = col_palette, legend.lab = "# Occurrences",
-                         smallplot = c(0.85, 0.88, 0.2, 0.8))
-    }
+    if(legend){ 
+      
+   }
   } else {
     return(list(map_eq = map_eq, r_pts = r_pts, colors = pt_col))
   }
